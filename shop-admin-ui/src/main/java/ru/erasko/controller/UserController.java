@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.erasko.model.User;
 import ru.erasko.repo.RoleRepository;
 import ru.erasko.rest.NotFoundException;
+import ru.erasko.service.RoleService;
 import ru.erasko.service.UserService;
 
 import javax.validation.Valid;
@@ -21,12 +22,12 @@ public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private UserService userService;
-    private RoleRepository roleRepository;
+    private RoleService roleService;
 
     @Autowired
-    public UserController(UserService  userService, RoleRepository roleRepository) {
+    public UserController(UserService  userService, RoleService roleService) {
         this.userService = userService;
-        this.roleRepository = roleRepository;
+        this.roleService = roleService;
     }
 
     @GetMapping
@@ -42,7 +43,7 @@ public class UserController {
         logger.info("Create user form");
 
         model.addAttribute("user", new User());
-        model.addAttribute("roles", roleRepository.findAll());
+        model.addAttribute("roles", roleService.findAll());
 
         logger.info("Create user form 2 - " + model.getAttribute("roles").toString());
         return "user";
@@ -68,7 +69,7 @@ public class UserController {
 
         model.addAttribute("user", userService.findById(id)
                 .orElseThrow(() ->new NotFoundException("Not found user by Id")));
-        model.addAttribute("roles", roleRepository.findAll());
+        model.addAttribute("roles", roleService.findAll());
         return "user";
     }
 
