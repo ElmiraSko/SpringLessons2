@@ -31,7 +31,7 @@ public class RoleService {
     }
 
     @Transactional
-    public void saveRole(Role role) {
+    public void save(Role role) {
         roleRepository.save(role);
     }
 

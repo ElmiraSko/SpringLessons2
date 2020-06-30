@@ -41,7 +41,7 @@ public class RoleController {
     public String saveNewRole(Role role) {
         logger.info("Save new role");
 
-        roleService.saveRole(role);
+        roleService.save(role);
         return "redirect:/role";
     }
 

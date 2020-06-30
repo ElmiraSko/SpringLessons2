@@ -6,12 +6,11 @@
 
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/fontawesome-all.min.css}">
-    <link rel="stylesheet" th:href="@{/css/datatables.min.css}">
-    <link rel="stylesheet" th:href="@{/css/fullcalendar.min.css}">
     <link rel="stylesheet" th:href="@{/css/bootadmin.min.css}">
 
-    <title>User-Form</title>
+    <title>Admin-Users</title>
 </head>
+
 <body class="bg-light">
 
 <nav class="navbar navbar-expand navbar-dark bg-primary">
@@ -38,51 +37,62 @@
         <ul class="list-unstyled">
             <li><a th:href="@{/user}"><i class="fa fa-fw fa-link"></i> Users </a></li>
             <li><a th:href="@{/role}"><i class="fa fa-fw fa-link"></i> Roles </a></li>
-            <li><a th:href="@{/category}"><i class="fa fa-fw fa-link"></i> Category </a></li>
+            <li><a href="#" th:href="@{/category}"><i class="fa fa-fw fa-link"></i> Category </a></li>
             <li><a th:href="@{/product}"><i class="fa fa-fw fa-link"></i> Products </a></li>
             <li><a href="#"><i class="fa fa-fw fa-link"></i> Other </a></li>
         </ul>
     </div>
 
     <div class="content p-4">
-
         <h2 class="mb-4">User Form</h2>
 
+        <form th:action="@{/user/new}">
+            <button type="submit" class="btn btn-secondary">Add User</button>
+        </form><br>
         <div class="card mb-4">
             <div class="card-body">
-
-                <p>Save new user / edit user</p>
+                <p>User form</p>
                 <form th:action="@{/user/save}" method="post" th:object="${user}">
                     <input th:type="hidden" th:field="*{id}"/>
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" th:field="*{name}" class="form-control"
                                placeholder="Enter name"/>
-
+                        <small id="nameError" class="form-text text-muted"
+                               th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+                            name error</small>
                     </div>
                     <div class="form-group">
                         <label for="age">Age</label>
                         <input type="text" id="age" th:field="*{age}" class="form-control"
                                placeholder="Enter age"/>
-
+                        <small id="ageError" class="form-text text-muted"
+                               th:if="${#fields.hasErrors('age')}" th:errors="*{age}">
+                            age validation error</small>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" id="email" th:field="*{email}" class="form-control"
+                        <input type="email" id="email" th:field="*{email}" class="form-control"
                                placeholder="Enter email"/>
-
+                        <small id="emailError" class="form-text text-muted"
+                               th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+                            email validation error</small>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" id="password" th:field="*{password}" class="form-control"
                                placeholder="Enter password"/>
-
+                        <small id="passError" class="form-text text-muted"
+                               th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+                            password error</small>
                     </div>
                     <div class="form-group">
-                        <label for="phone">Phone</label>
+                        <label for="phone">Rhone</label>
                         <input type="text" id="phone" th:field="*{phone}" class="form-control"
                                placeholder="Phone"/>
-
+                        <small id="phoneError" class="form-text text-muted"
+                               th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">
+                            phone error</small>
                     </div>
                     <div class="form-group">
                         <label for="roles">Roles</label>
@@ -90,8 +100,7 @@
                             <option th:each="role : ${roles}"
                                     th:text="${role.name}"
                                     th:value="${role.id}"
-                                    th:selected="${user.roles?.contains(role)}">
-                            </option>
+                                    th:selected="${user.roles?.contains(role)}"></option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -102,30 +111,9 @@
     </div>
 </div>
 
-<script th:src="@{../js/jquery.min.js}"></script>
-<script th:src="@{../js/bootstrap.bundle.min.js}"></script>
-<script th:src="@{../js/datatables.min.js}"></script>
-<script th:src="@{../js/moment.min.js}"></script>
-<script th:src="@{../js/fullcalendar.min.js}"></script>
-<script th:src="@{../js/bootadmin.min.js}"></script>
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118868344-1"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-118868344-1');
-</script>
-
-<script async th:src="@{//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js}"></script>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-4097235499795154",
-        enable_page_level_ads: true
-    });
-</script>
-
+<script th:src="@{js/jquery.min.js}"></script>
+<script th:src="@{js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{js/bootadmin.min.js}"></script>
 
 </body>
 </html>

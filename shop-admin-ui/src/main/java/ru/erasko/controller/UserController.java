@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import ru.erasko.model.User;
 import ru.erasko.repo.RoleRepository;
 import ru.erasko.rest.NotFoundException;
-import ru.erasko.service.RoleService;
 import ru.erasko.service.UserService;
 
 import javax.validation.Valid;
+
 
 @RequestMapping("/user")
 @Controller
@@ -21,13 +21,13 @@ public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    private UserService userService;
-    private RoleService roleService;
+    private final UserService userService;
+    private final RoleRepository roleRepository;
 
     @Autowired
-    public UserController(UserService  userService, RoleService roleService) {
+    public UserController(UserService  userService, RoleRepository roleRepository) {
         this.userService = userService;
-        this.roleService = roleService;
+        this.roleRepository = roleRepository;
     }
 
     @GetMapping
@@ -43,16 +43,18 @@ public class UserController {
         logger.info("Create user form");
 
         model.addAttribute("user", new User());
-        model.addAttribute("roles", roleService.findAll());
+        model.addAttribute("roles", roleRepository.findAll());
 
-        logger.info("Create user form 2 - " + model.getAttribute("roles").toString());
+        logger.info("Create user form - " + model.getAttribute("roles").toString());
         return "user";
     }
 
     @PostMapping("save")
     public String saveUser(@Valid User user, BindingResult bindingResult) {
 
-        logger.info("Save user method " + user.getRoles().toString());
+        logger.info("Save user method = " + user.getRoles().toString());
+        System.out.println(" User name = " + user.getName());
+        System.out.println(" user.getRoles().isEmpty() = " + user.getRoles().isEmpty());
 
         // стандартная (внутренняя) валидация
         if (bindingResult.hasErrors()) {
@@ -63,13 +65,14 @@ public class UserController {
         return "redirect:/user";
     }
 
+
     @GetMapping("edit")
     public String createUser(@RequestParam("id") Long id, Model model) {
         logger.info("Edit user width id {} ", id);
 
         model.addAttribute("user", userService.findById(id)
                 .orElseThrow(() ->new NotFoundException("Not found user by Id")));
-        model.addAttribute("roles", roleService.findAll());
+        model.addAttribute("roles", roleRepository.findAll());
         return "user";
     }
 

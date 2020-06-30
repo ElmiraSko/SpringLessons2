@@ -1,7 +1,10 @@
 package ru.erasko.model;
 
 import javax.persistence.*;
-import java.util.List;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -11,15 +14,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Это поле обязательное для заполнения")
     @Column(length = 32, nullable = false)
     private String name;
 
+    @Min(value = 16, message = "Минимальное значение поля 16 лет")
+    @Max(value = 110, message = "Максимальное значение поля 110 лет")
     @Column(nullable = false)
     private Integer age;
 
+    @NotBlank(message = "Email введен не верно")
     @Column(length = 64, nullable = false)
     private String email;
 
+    @NotBlank(message = "Это поле обязательное для заполнения")
     @Column(length = 128, nullable = false)
     private String password;
 
@@ -36,15 +44,14 @@ public class User {
     private List<Role> roles;
 
     public User() {
+        System.out.println("Конструктор по умолчанию у Юзера");
     }
 
-    public User(Long id, String name, Integer age, String email, String password, String phone) {
+    public User(Long id, String name, Integer age, String password) {
         this.id = id;
         this.name = name;
         this.age = age;
-        this.email = email;
         this.password = password;
-        this.phone = phone;
     }
 
     public Long getId() {
@@ -119,8 +126,6 @@ public class User {
                 ", age=" + age +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", phone='" + phone + '\'' +
                 '}';
     }
 }
-

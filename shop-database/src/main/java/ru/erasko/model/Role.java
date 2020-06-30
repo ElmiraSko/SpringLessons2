@@ -2,8 +2,7 @@ package ru.erasko.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "roles")
@@ -14,7 +13,7 @@ public class Role implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name", unique = true, nullable = false, length = 20)
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
     @ManyToMany(mappedBy = "roles")
@@ -23,10 +22,14 @@ public class Role implements Serializable {
     public Role() {
     }
 
-
+    public Role(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
+
     }
 
     public void setId(Long id) {
