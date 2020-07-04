@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/fontawesome-all.min.css}">
+    <link rel="stylesheet" th:href="@{/css/datatables.min.css}">
     <link rel="stylesheet" th:href="@{/css/bootadmin.min.css}">
 
     <title>Admin-Roles</title>
@@ -49,22 +50,18 @@
         </form><br>
         <div class="card mb-4">
             <div class="card-body">
-                <p>List of roles</p>
-                <table class="table mb-0">
-                    <thead class="thead-light">
+                <table id="role_table" class="table table-hover" cellspacing="0" width="100%">
+                    <thead>
                     <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Role</th>
-                        <th scope="col">Actions</th>
+                        <th>Id</th>
+                        <th>Role</th>
+                        <th class="actions">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr hidden>
-                        <td class="text-center" colspan="2">No data</td>
-                    </tr>
                     <tr th:each="role : ${roles}">
                         <th scope="row" th:text="${role.id}">1</th>
-                        <td th:text="${role.name}">UserName</td>
+                        <td th:text="${role.name}">Role Name</td>
                         <td>
                             <a class="#" href="#" th:href="@{/role/edit(id=${role.id})}">
                                 <i class="fas fa-edit"></i></a>
@@ -84,7 +81,14 @@
 
 <script th:src="@{js/jquery.min.js}"></script>
 <script th:src="@{js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/datatables.min.js}"></script>
 <script th:src="@{js/bootadmin.min.js}"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#role_table').DataTable();
+    });
+</script>
 
 </body>
 </html>

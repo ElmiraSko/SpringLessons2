@@ -7,6 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/fontawesome-all.min.css}">
     <link rel="stylesheet" th:href="@{/css/bootadmin.min.css}">
+    <link rel="stylesheet" th:href="@{/css/datatables.min.css}">
 
     <title>Products</title>
 </head>
@@ -52,7 +53,6 @@
 
         <div class="card mb-4">
             <div class="card-body">
-
                 <form>
                     <label for="minCost">Min Cost</label>
                     <input type="number" name="minCost" id="minCost" th:value="${minCost}">
@@ -68,23 +68,18 @@
 
         <div class="card mb-4">
             <div class="card-body">
-
-                <p>Product list</p>
-                <table class="table mb-0">
+                <table id="product_table" class="table table-hover" cellspacing="0" width="100%">
                     <thead class="thead-light">
                     <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Cost</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Actions</th>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Cost</th>
+                        <th>Category</th>
+                        <th class="actions">Actions</th>
                     </tr>
                     </thead>
 
                     <tbody>
-                    <tr th:unless="${productsPage.hasContent()}">
-                        <td class="text-center" colspan="5">No data</td>
-                    </tr>
                     <tr th:if="${productsPage.hasContent()}" th:each="prod : ${productsPage.content}">
                         <th scope="row" th:text="${prod.id}">1</th>
                         <td th:text="${prod.title}">title</td>
@@ -103,35 +98,6 @@
                     </tbody>
                 </table>
 
-                <div th:if="${productsPage.hasContent()}">
-                    <nav aria-label="...">
-                        <ul class="pagination">
-                            <li class="page-item" th:classappend="${!productsPage.hasPrevious()} ? 'disabled'">
-                                <a class="page-link"
-                                   th:href="@{/product(page=${prevPageNumber},
-						    size=${productsPage.size}, minCost=${minCost}, maxCost=${maxCost}, productTitle=${productTitle})}"
-                                   tabindex="-1">Previous</a>
-                            </li>
-
-                            <li th:each="num: ${#numbers.sequence(1, productsPage.totalPages)}"
-                                th:classappend="${num == productsPage.number + 1} ? 'active'"
-                                class="page-item">
-                                <a class="page-link"
-                                   th:text="${num}"
-                                   th:href="@{/product(page=${num},
-						size=${productsPage.size}, minCost=${minCost},
-						maxCost=${maxCost}, productTitle=${productTitle})}">1</a>
-                            </li>
-
-                            <li class="page-item" th:classappend="${!productsPage.hasNext()} ? 'disabled'">
-                                <a class="page-link"
-                                   th:href="@{/product(page=${nextPageNumber}, size=${productsPage.size},
-						   minCost=${minCost}, maxCost=${maxCost}, productTitle=${productTitle})}">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-
             </div>
         </div>
     </div>
@@ -139,7 +105,14 @@
 
 <script th:src="@{js/jquery.min.js}"></script>
 <script th:src="@{js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/datatables.min.js}"></script>
 <script th:src="@{js/bootadmin.min.js}"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#product_table').DataTable();
+    });
+</script>
 
 </body>
 </html>
