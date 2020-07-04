@@ -18,7 +18,7 @@ public class User {
     @Column(length = 32, nullable = false)
     private String name;
 
-    @Min(value = 16, message = "Минимальное значение поля 16 лет")
+    @Min(value = 16, message = "Минимальное значение поля 10 лет")
     @Max(value = 110, message = "Максимальное значение поля 110 лет")
     @Column(nullable = false)
     private Integer age;

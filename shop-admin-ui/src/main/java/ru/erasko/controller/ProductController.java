@@ -13,7 +13,6 @@ import ru.erasko.model.Product;
 import ru.erasko.rest.NotFoundException;
 import ru.erasko.service.CategoryService;
 import ru.erasko.service.ProductService;
-import ru.erasko.service.UserService;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
@@ -27,13 +26,13 @@ public class ProductController {
 
     private final ProductService productService;
     private final CategoryService categoryService;
-    private final UserService userService;
+
 
     @Autowired
-    public ProductController(ProductService productService, CategoryService categoryService, UserService userService) {
+    public ProductController(ProductService productService, CategoryService categoryService) {
         this.productService = productService;
         this.categoryService = categoryService;
-        this.userService = userService;
+
     }
 
     @GetMapping
@@ -61,6 +60,7 @@ public class ProductController {
         logger.info("Create product form");
 
         model.addAttribute("product", new Product());
+        model.addAttribute("categories", categoryService.findAllCategories());
         return "product";
     }
 
@@ -85,6 +85,7 @@ public class ProductController {
                 .orElseThrow(() ->new NotFoundException("Not found product by Id"));
 
         model.addAttribute("editProduct", editProduct);
+        model.addAttribute("categories", categoryService.findAllCategories());
         return "edit-product";
     }
 
