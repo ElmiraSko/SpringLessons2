@@ -59,7 +59,7 @@
                         <th scope="col">Id</th>
                         <th scope="col">Name</th>
                         <th scope="col">Age</th>
-                        <th scope="col">Password</th>
+                        <th scope="col">Role</th>
                         <th scope="col">Phone</th>
                         <th scope="col">Email</th>
                         <th scope="col">Actions</th>
@@ -74,7 +74,14 @@
                             <th scope="row" th:text="${us.id}">1</th>
                             <td th:text="${us.name}">UserName</td>
                             <td th:text="${us.age}">UserAge</td>
-                            <td th:text="${us.password}">UserPassword</td>
+                            <!--
+                            <td th:text="${us.getRoles()}">UserRole</td>
+                            -->
+                            <td>
+                                <ul class="list-unstyled collapse show" id="roles" th:each="role : ${us.getRoles()}">
+                                    <li th:text="${role.name}"></li>
+                                </ul>
+                            </td>
                             <td th:text="${us.phone}">UserPhone</td>
                             <td th:text="${us.email}">UserEmail</td>
                             <td>

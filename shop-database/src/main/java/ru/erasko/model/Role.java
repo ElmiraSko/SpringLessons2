@@ -52,6 +52,7 @@ public class Role implements Serializable {
         this.users = users;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,6 +71,6 @@ public class Role implements Serializable {
         return "Role{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                '}';
+                "}";
     }
 }

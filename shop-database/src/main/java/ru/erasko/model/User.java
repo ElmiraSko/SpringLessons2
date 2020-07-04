@@ -118,6 +118,14 @@ public class User {
         this.roles = roles;
     }
 
+    public String getRoleName() {
+        String str = "";
+        for (Role role: this.roles) {
+            str = role.getName() + " ";
+        }
+        return str;
+    }
+
     @Override
     public String toString() {
         return "User{" +
