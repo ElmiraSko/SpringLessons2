@@ -34,8 +34,8 @@ public class User {
     @Column(length = 12, nullable = true)
     private String phone;
 
-    @OneToMany(mappedBy = "user")
-    private List<Product> productList;
+//    @OneToMany(mappedBy = "user")
+//    private List<Product> productList;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles",
@@ -102,13 +102,13 @@ public class User {
         this.phone = phone;
     }
 
-    public List<Product> getProductList() {
-        return productList;
-    }
-
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
-    }
+//    public List<Product> getProductList() {
+//        return productList;
+//    }
+//
+//    public void setProductList(List<Product> productList) {
+//        this.productList = productList;
+//    }
 
     public List<Role> getRoles() {
         return roles;

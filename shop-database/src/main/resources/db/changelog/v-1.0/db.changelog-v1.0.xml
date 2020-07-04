@@ -24,7 +24,36 @@
     </changeSet>
 
     <changeSet id="2" author="elmira">
+        <sqlFile path="01-create-product-and-category-tables.sql"
+                 dbms="mysql"
+                 encoding="utf8"
+                 endDelimiter="\nGO"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+        <rollback>
+            <sqlFile path="01-drop-product-and-category-tables.sql"
+                     dbms="mysql"
+                     encoding="utf8"
+                     endDelimiter="\nGO"
+                     relativeToChangelogFile="true"
+                     splitStatements="true"
+                     stripComments="true"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="3" author="elmira">
         <sqlFile path="01-insert-default-users.sql"
+                 dbms="mysql"
+                 encoding="utf8"
+                 endDelimiter="\nGO"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+        <rollback/>
+    </changeSet>
+    <changeSet id="4" author="elmira">
+        <sqlFile path="01-insert-default-products-and-categories.sql"
                  dbms="mysql"
                  encoding="utf8"
                  endDelimiter="\nGO"

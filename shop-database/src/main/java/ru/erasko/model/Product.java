@@ -17,8 +17,8 @@ public class Product {
     @Column(length = 32, nullable = false)
     private BigDecimal cost;
 
-    @ManyToOne
-    private User user;
+//    @ManyToOne
+//    private User user;
 
     @ManyToOne
     private Category category;
@@ -56,13 +56,13 @@ public class Product {
         this.cost = cost;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     public Category getCategory() {
         return category;

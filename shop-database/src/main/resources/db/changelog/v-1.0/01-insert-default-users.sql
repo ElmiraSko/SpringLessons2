@@ -12,11 +12,3 @@ SELECT (SELECT id FROM `users` WHERE `name` = 'admin'), (SELECT id FROM `roles` 
 UNION ALL
 SELECT (SELECT id FROM `users` WHERE `name` = 'guest'), (SELECT id FROM `roles` WHERE `name` = 'ROLE_GUEST');
 GO
-
-INSERT INTO `products` (`title`, `cost`)
-VALUE ('dress', 2800);
-GO
-
-INSERT INTO `categories` (`title`)
-VALUE ('Men'), ('Women');
-GO
