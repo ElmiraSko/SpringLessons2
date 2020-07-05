@@ -34,8 +34,11 @@ public class User {
     @Column(length = 12, nullable = true)
     private String phone;
 
-//    @OneToMany(mappedBy = "user")
-//    private List<Product> productList;
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles",
@@ -102,14 +105,6 @@ public class User {
         this.phone = phone;
     }
 
-//    public List<Product> getProductList() {
-//        return productList;
-//    }
-//
-//    public void setProductList(List<Product> productList) {
-//        this.productList = productList;
-//    }
-
     public List<Role> getRoles() {
         return roles;
     }
@@ -118,12 +113,20 @@ public class User {
         this.roles = roles;
     }
 
-    public String getRoleName() {
-        String str = "";
-        for (Role role: this.roles) {
-            str = role.getName() + " ";
-        }
-        return str;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     @Override

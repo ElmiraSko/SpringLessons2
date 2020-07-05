@@ -80,11 +80,11 @@
                     </thead>
 
                     <tbody>
-                    <tr th:if="${productsPage.hasContent()}" th:each="prod : ${productsPage.content}">
+                    <tr th:each="prod : ${productsList}">
                         <th scope="row" th:text="${prod.id}">1</th>
                         <td th:text="${prod.title}">title</td>
                         <td th:text="${prod.cost}">cost</td>
-                        <td th:text="${prod.getCategory().title}">category</td>
+                        <td th:text="${prod.category.title}">category</td>
                         <td>
                             <a class="btn btn-success"  th:href="@{/product/edit/{id} (id=${prod.id})}">
                                 <i class="fas fa-edit"></i></a>

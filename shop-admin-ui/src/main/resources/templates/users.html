@@ -58,6 +58,8 @@
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
+                        <th>First name</th>
+                        <th>Last name</th>
                         <th>Age</th>
                         <th>Role</th>
                         <th>Phone</th>
@@ -69,6 +71,8 @@
                     <tr th:each="us : ${users}">
                         <th scope="row" th:text="${us.id}">1</th>
                         <td th:text="${us.name}">UserName</td>
+                        <td th:text="${us.firstName}">FirsName</td>
+                        <td th:text="${us.lastName}">LastName</td>
                         <td th:text="${us.age}">UserAge</td>
                         <td>
                             <ul class="list-unstyled collapse show" id="roles" th:each="role : ${us.getRoles()}">

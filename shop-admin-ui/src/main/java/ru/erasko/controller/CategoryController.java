@@ -7,27 +7,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.erasko.model.Category;
-import ru.erasko.model.User;
+import ru.erasko.repo.CategoryRepository;
 import ru.erasko.rest.NotFoundException;
-import ru.erasko.service.CategoryService;
 
 @RequestMapping("/category")
 @Controller
 public class CategoryController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    private CategoryService categoryService;
+    private CategoryRepository categoryRepository;
 
     @Autowired
-    public CategoryController(CategoryService categoryService) {
-        this.categoryService = categoryService;
+    public CategoryController(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
     }
 
     @GetMapping
     public String categoryList(Model model) {
         logger.info("Category list");
 
-        model.addAttribute("categories", categoryService.findAllCategories());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "categories";
     }
 
@@ -43,7 +42,7 @@ public class CategoryController {
     public String saveCategory(Category category) {
         logger.info("Save category method");
 
-        categoryService.save(category);
+        categoryRepository.save(category);
         return "redirect:/category";
     }
 
@@ -51,8 +50,8 @@ public class CategoryController {
     public String editCategory(@RequestParam("id") long id, Model model) {
         logger.info("Edit category width id {} ", id);
 
-        model.addAttribute("category", categoryService.findById(id)
-                .orElseThrow(() ->new NotFoundException("Not found category by Id")));
+        model.addAttribute("category", categoryRepository.findById(id)
+                .orElseThrow(() ->new NotFoundException()));
         return "category";
     }
 
@@ -60,7 +59,7 @@ public class CategoryController {
     public String delete(@RequestParam("id") long id) {
         logger.info("Delete category width id {} ", id);
 
-        categoryService.delete(id);
+        categoryRepository.deleteById(id);
         return "redirect:/category";
     }
 

@@ -7,10 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ru.erasko.controller.repr.UserRepr;
 import ru.erasko.model.User;
 import ru.erasko.repo.RoleRepository;
 import ru.erasko.rest.NotFoundException;
-import ru.erasko.service.UserService;
+import ru.erasko.service.UserServiceImpl;
 
 import javax.validation.Valid;
 
@@ -21,12 +22,12 @@ public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    private final UserService userService;
+    private final UserServiceImpl userServiceImpl;
     private final RoleRepository roleRepository;
 
     @Autowired
-    public UserController(UserService  userService, RoleRepository roleRepository) {
-        this.userService = userService;
+    public UserController(UserServiceImpl userServiceImpl, RoleRepository roleRepository) {
+        this.userServiceImpl = userServiceImpl;
         this.roleRepository = roleRepository;
     }
 
@@ -34,8 +35,7 @@ public class UserController {
     public String userList(Model model) {
         logger.info("User list");
 
-        model.addAttribute("users", userService.findAll());
-
+        model.addAttribute("users", userServiceImpl.findAll());
         return "users";
     }
 
@@ -43,7 +43,7 @@ public class UserController {
     public String createUser(Model model) {
         logger.info("Create user form");
 
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new UserRepr());
         model.addAttribute("roles", roleRepository.findAll());
 
         logger.info("Create user form - " + model.getAttribute("roles").toString());
@@ -51,18 +51,18 @@ public class UserController {
     }
 
     @PostMapping("save")
-    public String saveUser(@Valid User user, BindingResult bindingResult) {
+    public String saveUser(@Valid UserRepr user, Model model, BindingResult bindingResult) {
 
         logger.info("Save user method = " + user.getRoles().toString());
-        System.out.println(" User name = " + user.getName());
-        System.out.println(" user.getRoles().isEmpty() = " + user.getRoles().isEmpty());
 
         // стандартная (внутренняя) валидация
         if (bindingResult.hasErrors()) {
             return "user";
         }
+        System.out.println(" User name = " + user.getName());
+        System.out.println(" user.getRoles().isEmpty() = " + user.getRoles().isEmpty());
 
-        userService.save(user);
+        userServiceImpl.save(user);
         return "redirect:/user";
     }
 
@@ -71,8 +71,8 @@ public class UserController {
     public String createUser(@RequestParam("id") Long id, Model model) {
         logger.info("Edit user width id {} ", id);
 
-        model.addAttribute("user", userService.findById(id)
-                .orElseThrow(() ->new NotFoundException("Not found user by Id")));
+        model.addAttribute("user", userServiceImpl.findById(id)
+                .orElseThrow(() ->new NotFoundException()));
         model.addAttribute("roles", roleRepository.findAll());
         return "user";
     }
@@ -81,7 +81,7 @@ public class UserController {
     public String delete(@RequestParam("id") long id) {
         logger.info("Delete user width id {} ", id);
 
-        userService.delete(id);
+        userServiceImpl.delete(id);
         return "redirect:/user";
     }
 }

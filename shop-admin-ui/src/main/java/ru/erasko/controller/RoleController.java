@@ -7,25 +7,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.erasko.model.Role;
+import ru.erasko.repo.RoleRepository;
 import ru.erasko.rest.NotFoundException;
-import ru.erasko.service.RoleService;
 
 @RequestMapping("/role")
 @Controller
 public class RoleController {
 
-    private RoleService roleService;
+    private final RoleRepository roleRepository;
     private static final Logger logger = LoggerFactory.getLogger(RoleController.class);
 
     @Autowired
-    public RoleController (RoleService roleService) {
-        this.roleService = roleService;
+    public RoleController (RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
     }
 
     @GetMapping
     public String rolePage(Model model) {
         logger.info("Role list");
-        model.addAttribute("roles", roleService.findAll());
+        model.addAttribute("roles", roleRepository.findAll());
         return "roles";
     }
 
@@ -41,7 +41,7 @@ public class RoleController {
     public String saveNewRole(Role role) {
         logger.info("Save new role");
 
-        roleService.save(role);
+        roleRepository.save(role);
         return "redirect:/role";
     }
 
@@ -49,8 +49,8 @@ public class RoleController {
     public String editRoles(@RequestParam("id") long id, Model model) {
         logger.info("Edit role width id {} ", id);
 
-        model.addAttribute("role", roleService.findById(id)
-                .orElseThrow(() ->new NotFoundException("Not found role by Id")));
+        model.addAttribute("role", roleRepository.findById(id)
+                .orElseThrow(() ->new NotFoundException()));
         return "role";
     }
 
@@ -58,7 +58,7 @@ public class RoleController {
     public String delete(@RequestParam("id") long id) {
         logger.info("Delete role width id {} ", id);
 
-        roleService.delete(id);
+        roleRepository.deleteById(id);
         return "redirect:/role";
     }
 }
