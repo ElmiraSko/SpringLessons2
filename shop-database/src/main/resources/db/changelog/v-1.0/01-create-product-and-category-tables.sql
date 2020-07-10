@@ -13,7 +13,7 @@ create table products (
    id bigint not null auto_increment,
     cost decimal(19,2) not null,
     title varchar(32) not null,
-    category_id bigint,
+    category_id bigint not null,
     primary key (id)
 ) engine=InnoDB;
 GO

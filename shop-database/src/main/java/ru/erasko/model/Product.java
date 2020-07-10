@@ -21,6 +21,9 @@ public class Product {
     @ManyToOne
     private Category category;
 
+    @ManyToOne(optional = false)
+    private Brand brand;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL)
     @JoinTable(name = "products_pictures",
             joinColumns = @JoinColumn(name = "product_id"),
@@ -75,6 +78,14 @@ public class Product {
 
     public void setPictures(List<Picture> pictures) {
         this.pictures = pictures;
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
     }
 
     @Override

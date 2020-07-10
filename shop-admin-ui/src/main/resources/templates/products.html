@@ -39,33 +39,17 @@
             <li><a th:href="@{/user}"><i class="fa fa-fw fa-link"></i> Users </a></li>
             <li><a th:href="@{/role}"><i class="fa fa-fw fa-link"></i> Roles </a></li>
             <li><a href="#" th:href="@{/category}"><i class="fa fa-fw fa-link"></i> Category </a></li>
-            <li><a th:href="@{/product}"><i class="fa fa-fw fa-link"></i> Products </a></li>
-            <li><a href="#"><i class="fa fa-fw fa-link"></i> Other </a></li>
+            <li><a th:href="@{/products}"><i class="fa fa-fw fa-link"></i> Products </a></li>
+            <li><a th:href="@{/brands}"><i class="fa fa-fw fa-link"></i> Brands </a></li>
         </ul>
     </div>
 
     <div class="content p-4">
         <h2 class="mb-4">Products</h2>
 
-        <form th:action="@{/product/new}">
+        <form th:action="@{/product/create}">
             <button type="submit" class="btn btn-secondary">Add product</button>
         </form><br>
-
-        <div class="card mb-4">
-            <div class="card-body">
-                <form>
-                    <label for="minCost">Min Cost</label>
-                    <input type="number" name="minCost" id="minCost" th:value="${minCost}">
-                    <label for="maxCost">Max Cost</label>
-                    <input type="number" name="maxCost" id="maxCost" th:value="${maxCost}">
-                    <label for="productTitle">Product Title</label>
-                    <input type="text" name="productTitle" id="productTitle" th:value="${productTitle}">
-                    <button type="submit" class="btn btn-primary">Filter</button>
-                    <a th:href="@{/product}" class="btn btn-secondary" role="button">Reset</a>
-                </form>
-            </div>
-        </div>
-
         <div class="card mb-4">
             <div class="card-body">
                 <table id="product_table" class="table table-hover" cellspacing="0" width="100%">
@@ -80,7 +64,7 @@
                     </thead>
 
                     <tbody>
-                    <tr th:each="prod : ${productsList}">
+                    <tr th:each="prod : ${products}">
                         <th scope="row" th:text="${prod.id}">1</th>
                         <td th:text="${prod.title}">title</td>
                         <td th:text="${prod.cost}">cost</td>

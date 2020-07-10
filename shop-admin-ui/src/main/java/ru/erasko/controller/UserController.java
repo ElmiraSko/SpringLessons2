@@ -52,16 +52,11 @@ public class UserController {
 
     @PostMapping("save")
     public String saveUser(@Valid UserRepr user, Model model, BindingResult bindingResult) {
-
         logger.info("Save user method = " + user.getRoles().toString());
 
-        // стандартная (внутренняя) валидация
         if (bindingResult.hasErrors()) {
             return "user";
         }
-        System.out.println(" User name = " + user.getName());
-        System.out.println(" user.getRoles().isEmpty() = " + user.getRoles().isEmpty());
-
         userServiceImpl.save(user);
         return "redirect:/user";
     }

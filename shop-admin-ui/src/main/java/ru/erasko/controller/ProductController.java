@@ -8,59 +8,51 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.erasko.controller.repr.ProductRepr;
+import ru.erasko.repo.BrandRepository;
 import ru.erasko.repo.CategoryRepository;
 import ru.erasko.rest.NotFoundException;
 import ru.erasko.service.ProductServiceImpl;
-import java.math.BigDecimal;
-import java.util.List;
 
-@RequestMapping("/product")
+@RequestMapping
 @Controller
-@ControllerAdvice
 public class ProductController {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     private final ProductServiceImpl productService;
     private final CategoryRepository categoryRepository;
+    private final BrandRepository brandRepository;
 
 
     @Autowired
-    public ProductController(ProductServiceImpl productService, CategoryRepository categoryRepository) {
+    public ProductController(ProductServiceImpl productService, CategoryRepository categoryRepository,
+                             BrandRepository brandRepository) {
         this.productService = productService;
         this.categoryRepository = categoryRepository;
-
+        this.brandRepository = brandRepository;
     }
 
-    @GetMapping
-    public String productList(Model model,
-                                 @RequestParam(name = "minCost", required = false) BigDecimal minCost,
-                                 @RequestParam(name = "maxCost", required = false) BigDecimal maxCost,
-                                 @RequestParam(name = "productTitle", required = false) String productTitle) {
-
-        List<ProductRepr> productList = productService.findAllByFilter(minCost, maxCost, productTitle);
-
-        model.addAttribute("productsList", productList);
-        model.addAttribute("minCost", minCost);
-        model.addAttribute("maxCost", maxCost);
-        model.addAttribute("productTitle", productTitle);
+    @GetMapping("/products")
+    public String productList(Model model) {
+        model.addAttribute("activePage", "Products");
+        model.addAttribute("products", productService.findAll());
         return "products";
     }
 
-    @GetMapping("new")
+    @GetMapping("/product/create")
     public String createProduct(Model model) {
         logger.info("Create product form");
         model.addAttribute("create", true);
         model.addAttribute("activePage", "Products");
         model.addAttribute("product", new ProductRepr());
         model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("brands", brandRepository.findAll());
         return "product";
     }
 
-    @PostMapping
+    @PostMapping("/product")
     public String saveProduct(Model model, RedirectAttributes redirectAttributes, ProductRepr product) {
         logger.info("Save product method " + product.toString());
-
         model.addAttribute("activePage", "Products");
 
         try {
@@ -76,38 +68,22 @@ public class ProductController {
         return "redirect:/product";
     }
 
-    @GetMapping(value="/edit/{id}")
+    @GetMapping(value="/product/edit/{id}")
     public String findProductById(Model model, @PathVariable(value="id") long id) {
         logger.info("Find product by Id method");
         model.addAttribute("edit", true);
         model.addAttribute("activePage", "Products");
         model.addAttribute("product", productService.findById(id).orElseThrow(NotFoundException::new));
         model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("brands", brandRepository.findAll());
         return "product";
     }
 
-    @DeleteMapping
-    public String delete(@RequestParam("id") long id) {
+    @DeleteMapping("/product")
+    public String delete(Model model, @PathVariable("id") Long id) {
         logger.info("Delete product width id {} ", id);
-
+        model.addAttribute("activePage", "Products");
         productService.deleteById(id);
         return "redirect:/product";
     }
-
-//    @PostMapping(value="/save/{id}")
-//    public String saveProductById(@ModelAttribute("editProduct") ProductRepr product,
-//                                  BindingResult bindingResult) {
-//        logger.info("Save product by id" + product.toString());
-//
-//        if (bindingResult.hasErrors()) {
-//            return "edit-product";
-//        }
-//        try {
-//            productService.save(product);
-//        } catch (IOException e) {
-//            logger.error("Problem with creating or updating product", e);
-//            e.printStackTrace();
-//        }
-//        return "redirect:/product";
-//    }
 }
