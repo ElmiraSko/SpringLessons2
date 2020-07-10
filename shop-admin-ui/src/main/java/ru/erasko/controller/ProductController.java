@@ -47,7 +47,7 @@ public class ProductController {
         model.addAttribute("product", new ProductRepr());
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("brands", brandRepository.findAll());
-        return "product";
+        return "product_form";
     }
 
     @PostMapping("/product")
@@ -61,11 +61,11 @@ public class ProductController {
             logger.error("Problem with creating or updating product", ex);
             redirectAttributes.addFlashAttribute("error", true);
             if (product.getId() == null) {
-                return "redirect:/product/new";
+                return "redirect:/product/create";
             }
             return "redirect:/product" + "/edit/" + product.getId();
         }
-        return "redirect:/product";
+        return "redirect:/products";
     }
 
     @GetMapping(value="/product/edit/{id}")
@@ -76,7 +76,7 @@ public class ProductController {
         model.addAttribute("product", productService.findById(id).orElseThrow(NotFoundException::new));
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("brands", brandRepository.findAll());
-        return "product";
+        return "product_form";
     }
 
     @DeleteMapping("/product")
@@ -84,6 +84,6 @@ public class ProductController {
         logger.info("Delete product width id {} ", id);
         model.addAttribute("activePage", "Products");
         productService.deleteById(id);
-        return "redirect:/product";
+        return "redirect:/products";
     }
 }

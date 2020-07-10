@@ -1,6 +1,7 @@
 package ru.erasko.controller.repr;
 
 import org.springframework.web.multipart.MultipartFile;
+import ru.erasko.model.Brand;
 import ru.erasko.model.Category;
 import ru.erasko.model.Product;
 
@@ -19,6 +20,8 @@ public class ProductRepr implements Serializable {
 
     private Category category;
 
+    private Brand brand;
+
     private List<PictureRepr> pictures;
 
     private MultipartFile[] newPictures;
@@ -31,7 +34,7 @@ public class ProductRepr implements Serializable {
         this.title = product.getTitle();
         this.cost = product.getCost();
         this.category = product.getCategory();
-//        this.brand = product.getBrand();
+        this.brand = product.getBrand();
         this.pictures = product.getPictures().stream()
                 .map(PictureRepr::new)
                 .collect(Collectors.toList());
@@ -67,6 +70,14 @@ public class ProductRepr implements Serializable {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
     }
 
     public List<PictureRepr> getPictures() {

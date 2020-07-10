@@ -3,6 +3,7 @@ package ru.erasko.controller.repr;
 import ru.erasko.model.Role;
 import ru.erasko.model.User;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,10 +11,10 @@ public class UserRepr implements Serializable {
 
     private Long id;
 
-//    @NotEmpty
+    @NotEmpty
     private String name;
 
-//    @NotEmpty
+    @NotEmpty
     private String password;
 
     private Integer age;
@@ -119,8 +120,14 @@ public class UserRepr implements Serializable {
     public String toString() {
         return "UserRepr{" +
                 "id=" + id +
-                ", username='" + name + '\'' +
+                ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
+                ", age=" + age +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 }

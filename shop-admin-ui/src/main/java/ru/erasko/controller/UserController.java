@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.erasko.controller.repr.UserRepr;
-import ru.erasko.model.User;
 import ru.erasko.repo.RoleRepository;
 import ru.erasko.rest.NotFoundException;
 import ru.erasko.service.UserServiceImpl;
@@ -16,7 +15,7 @@ import ru.erasko.service.UserServiceImpl;
 import javax.validation.Valid;
 
 
-@RequestMapping("/user")
+@RequestMapping
 @Controller
 public class UserController {
 
@@ -31,52 +30,56 @@ public class UserController {
         this.roleRepository = roleRepository;
     }
 
-    @GetMapping
+    @GetMapping("/users")
     public String userList(Model model) {
         logger.info("User list");
-
+        model.addAttribute("activePage", "Users");
         model.addAttribute("users", userServiceImpl.findAll());
         return "users";
     }
 
-    @GetMapping("new")
+    @GetMapping("/user/create")
     public String createUser(Model model) {
         logger.info("Create user form");
-
+        model.addAttribute("create", true);
+        model.addAttribute("activePage", "Users");
         model.addAttribute("user", new UserRepr());
         model.addAttribute("roles", roleRepository.findAll());
 
         logger.info("Create user form - " + model.getAttribute("roles").toString());
-        return "user";
+        return "user_form";
     }
 
-    @PostMapping("save")
+    @PostMapping("/user/save")
     public String saveUser(@Valid UserRepr user, Model model, BindingResult bindingResult) {
-        logger.info("Save user method = " + user.getRoles().toString());
-
+        logger.info("Save user method  " + user.getRoles().toString());
+        model.addAttribute("activePage", "Users");
         if (bindingResult.hasErrors()) {
-            return "user";
+            return "user_form";
         }
+        logger.info("Save user method  " + user.toString());
         userServiceImpl.save(user);
-        return "redirect:/user";
+        return "redirect:/users";
     }
 
 
-    @GetMapping("edit")
+    @GetMapping("/user/edit")
     public String createUser(@RequestParam("id") Long id, Model model) {
         logger.info("Edit user width id {} ", id);
 
+        model.addAttribute("edit", true);
+        model.addAttribute("activePage", "Users");
         model.addAttribute("user", userServiceImpl.findById(id)
                 .orElseThrow(() ->new NotFoundException()));
         model.addAttribute("roles", roleRepository.findAll());
-        return "user";
+        return "user_form";
     }
 
-    @DeleteMapping
+    @DeleteMapping("/users")
     public String delete(@RequestParam("id") long id) {
         logger.info("Delete user width id {} ", id);
 
         userServiceImpl.delete(id);
-        return "redirect:/user";
+        return "redirect:/users";
     }
 }

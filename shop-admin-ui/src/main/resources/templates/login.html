@@ -1,20 +1,9 @@
 <!doctype html>
 <html lang="en" xmlns:th ="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/css/fontawesome-all.min.css}">
-    <link rel="stylesheet" th:href="@{/css/datatables.min.css}">
-    <link rel="stylesheet" th:href="@{/css/bootadmin.min.css}">
-
-    <title>Login | BootAdmin</title>
-</head>
+<head th:replace="fragments/header :: head"></head>
 
 <body class="bg-light">
-
 <div class="container h-100">
     <div class="row h-100 justify-content-center align-items-center">
         <div class="col-md-4">
@@ -62,13 +51,7 @@
         </div>
     </div>
 </div>
-
-<script th:src="@{/js/jquery.min.js}"></script>
-<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-<script th:src="@{/js/datatables.min.js}"></script>
-<script th:src="@{/js/moment.min.js}"></script>
-<script th:src="@{/js/fullcalendar.min.js}"></script>
-<script th:src="@{/js/bootadmin.min.js}"></script>
+<script th:replace="fragments/footer :: scripts"></script>
 
 </body>
 </html>

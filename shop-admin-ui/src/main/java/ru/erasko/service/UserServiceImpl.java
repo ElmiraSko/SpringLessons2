@@ -3,7 +3,6 @@ package ru.erasko.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.erasko.controller.repr.UserRepr;
 import ru.erasko.model.User;
 import ru.erasko.repo.UserRepository;
@@ -41,12 +40,13 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setId(userRepr.getId());
         user.setName(userRepr.getName());
-        user.setAge(userRepr.getAge());
-        user.setPassword(passwordEncoder.encode(userRepr.getPassword()));
         user.setFirstName(userRepr.getFirstName());
         user.setLastName(userRepr.getLastName());
+        user.setPassword(passwordEncoder.encode(userRepr.getPassword()));
         user.setEmail(userRepr.getEmail());
         user.setRoles(userRepr.getRoles());
+        user.setPhone(userRepr.getPhone());
+        user.setAge(userRepr.getAge());
         userRepository.save(user);
     }
 

@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 
     @GetMapping("/")
-    public String indexPage() {
+    public String indexPage(Model model) {
+        model.addAttribute("activePage", "None");
         return "index";
     }
 

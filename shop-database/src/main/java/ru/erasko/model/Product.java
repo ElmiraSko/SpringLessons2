@@ -94,6 +94,8 @@ public class Product {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", cost=" + cost +
+                ", category=" + category +
+                ", brand=" + brand +
                 '}';
     }
 }
