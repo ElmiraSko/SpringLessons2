@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 public class ProductRepr implements Serializable {
     private Long id;
 
-    private String title;
+    private String name;
 
-    private BigDecimal cost;
+    private BigDecimal price;
 
     private Category category;
 
@@ -31,8 +31,8 @@ public class ProductRepr implements Serializable {
 
     public ProductRepr(Product product) {
         this.id = product.getId();
-        this.title = product.getTitle();
-        this.cost = product.getCost();
+        this.name = product.getName();
+        this.price = product.getPrice();
         this.category = product.getCategory();
         this.brand = product.getBrand();
         this.pictures = product.getPictures().stream()
@@ -48,20 +48,20 @@ public class ProductRepr implements Serializable {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public BigDecimal getCost() {
-        return cost;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setCost(BigDecimal cost) {
-        this.cost = cost;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public Category getCategory() {
@@ -113,8 +113,8 @@ public class ProductRepr implements Serializable {
     public String toString() {
         return "ProductRepr{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
-                ", cost=" + cost +
+                ", title='" + name + '\'' +
+                ", cost=" + price +
                 ", category=" + category +
                 '}';
     }

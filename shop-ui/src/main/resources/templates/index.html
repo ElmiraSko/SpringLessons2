@@ -86,11 +86,11 @@
                   </figure>
                   <div class="block-4-text p-4">
                     <h3><a th:href="@{'/product_details/' + ${prod.id}}">
-                      <span th:utext="${prod.title}"></span>
+                      <span th:utext="${prod.name}"></span>
                     </a></h3>
-                    <p class="mb-0">Finding perfect <span th:utext="${prod.title}"></span></p>
+                    <p class="mb-0">Finding perfect <span th:utext="${prod.name}"></span></p>
                     <p class="text-primary font-weight-bold">
-                      <span th:utext="${prod.cost}"></span></p>
+                      <span th:utext="${prod.price}"></span></p>
                   </div>
                 </div>
               </div>

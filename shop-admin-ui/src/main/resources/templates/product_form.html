@@ -20,10 +20,10 @@
                 <form th:action="@{/product}" method="post" th:object="${product}" enctype="multipart/form-data">
                     <input th:type="hidden" th:field="*{id}">
                     <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" id="title" th:field="*{title}" class="form-control"  placeholder="Enter name"/>
+                        <label for="name">Title</label>
+                        <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Enter name"/>
                         <small id="titleError" class="form-text text-muted"
-                               th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+                               th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
                             title error</small>
                     </div>
                     <div class="form-group">
@@ -35,17 +35,17 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="cost">Cost</label>
-                        <input type="number" id="cost" th:field="*{cost}" class="form-control" step="0.01" min="0" placeholder="0,00"/>
-                        <small id="costError" class="form-text text-muted"
-                               th:if="${#fields.hasErrors('cost')}" th:errors="*{cost}">
+                        <label for="price">Price</label>
+                        <input type="number" id="price" th:field="*{price}" class="form-control" step="0.01" min="0" placeholder="0,00"/>
+                        <small id="priceError" class="form-text text-muted"
+                               th:if="${#fields.hasErrors('price')}" th:errors="*{price}">
                             cost error</small>
                     </div>
                     <div class="form-group">
                         <label for="categories">Categories</label>
                         <select multiple class="form-control" id="categories" th:field="*{category}" required>
                             <option th:each="category : ${categories}"
-                                    th:text="${category.title}"
+                                    th:text="${category.name}"
                                     th:value="${category.id}"
                                     th:selected="${product.category?.equals(category)}"></option>
                         </select>

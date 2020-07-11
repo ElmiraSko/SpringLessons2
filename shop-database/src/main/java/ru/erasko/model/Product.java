@@ -13,10 +13,10 @@ public class Product {
     private Long id;
 
     @Column(length = 32, nullable = false)
-    private String title;
+    private String name;
 
     @Column(length = 32, nullable = false)
-    private BigDecimal cost;
+    private BigDecimal price;
 
     @ManyToOne
     private Category category;
@@ -34,10 +34,10 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, String title, BigDecimal cost) {
+    public Product(Long id, String name, BigDecimal price) {
         this.id = id;
-        this.title = title;
-        this.cost = cost;
+        this.name = name;
+        this.price = price;
     }
 
     public Long getId() {
@@ -48,20 +48,20 @@ public class Product {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String title) {
+        this.name = title;
     }
 
-    public BigDecimal getCost() {
-        return cost;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setCost(BigDecimal cost) {
-        this.cost = cost;
+    public void setPrice(BigDecimal cost) {
+        this.price = cost;
     }
 
     public Category getCategory() {
@@ -92,8 +92,8 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
-                ", cost=" + cost +
+                ", title='" + name + '\'' +
+                ", cost=" + price +
                 ", category=" + category +
                 ", brand=" + brand +
                 '}';

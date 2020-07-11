@@ -7,19 +7,19 @@ import java.io.Serializable;
 public class CategoryRepr implements Serializable {
     private long id;
 
-    private String title;
+    private String name;
 
     private long productCount;
 
-    public CategoryRepr(long id, String title, long productCount) {
+    public CategoryRepr(long id, String name, long productCount) {
         this.id = id;
-        this.title = title;
+        this.name = name;
         this.productCount = productCount;
     }
 
     public CategoryRepr(Category category) {
         this.id = category.getId();
-        this.title = category.getTitle();
+        this.name = category.getName();
     }
 
     public long getId() {
@@ -30,12 +30,12 @@ public class CategoryRepr implements Serializable {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public long getProductCount() {
