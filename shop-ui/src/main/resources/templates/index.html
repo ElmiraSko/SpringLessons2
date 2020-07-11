@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th ="http://www.thymeleaf.org">
-  <head>
-    <title>Main page</title>
-    <div th:replace="fragments/header :: header"></div>
-  </head>
-  <body>
+
+<div th:replace="fragments/header :: head"></div>
+<body>
 
   <div class="site-wrap">
-    <div th:replace="fragments/header_body :: header_body"></div>
+    <div th:replace="fragments/header :: header"></div>
 
     <div class="site-blocks-cover" th:style="'background-image: url(/images/hero_1.jpg);'" data-aos="fade">
       <div class="container">
@@ -87,7 +85,7 @@
                          alt="Image placeholder" class="img-fluid">
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a th:href="@{'/shop-single/' + ${prod.id}}">
+                    <h3><a th:href="@{'/product-single/' + ${prod.id}}">
                       <span th:utext="${prod.title}"></span>
                     </a></h3>
                     <p class="mb-0">Finding perfect <span th:utext="${prod.title}"></span></p>
@@ -129,7 +127,7 @@
 
     <div th:replace="fragments/footer :: footer"></div>
   </div>
-  <div th:replace="fragments/footer_script :: scripts"></div>
+  <div th:replace="fragments/footer :: scripts"></div>
 
   </body>
 </html>

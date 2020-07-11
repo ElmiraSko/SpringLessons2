@@ -32,15 +32,4 @@ public class PictureController {
             response.getOutputStream().write(picture.get().getPictureData().getData());
         }
     }
-
-//    @GetMapping("/picture/{pictureName}")
-//    public void findByNamePicture(@PathVariable("pictureName") String pictureName,
-//                                HttpServletResponse response) throws IOException {
-//        logger.info("Picture name {}", pictureName);
-//        Optional<Picture> picture = pictureRepository.findByName(pictureName);
-//        if (picture.isPresent()) {
-//            response.setContentType(picture.get().getContentType());
-//            response.getOutputStream().write(picture.get().getPictureData().getData());
-//        }
-//    }
 }

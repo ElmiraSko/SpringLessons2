@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th ="http://www.thymeleaf.org">
-  <head>
-    <title>Shop single</title>
-    <div th:replace="fragments/header :: header"></div>
-  </head>
-  <body>
+<div th:replace="fragments/header :: head"></div>
+<body>
   
   <div class="site-wrap">
-    <div th:replace="fragments/header_body :: header_body"></div>
+    <div th:replace="fragments/header :: header"></div>
 
     <div class="bg-light py-3">
       <div class="container">
@@ -116,7 +113,7 @@
 
     <div th:replace="fragments/footer :: footer"></div>
   </div>
-  <div th:replace="fragments/footer_script :: scripts"></div>
+  <div th:replace="fragments/footer :: scripts"></div>
     
   </body>
 </html>

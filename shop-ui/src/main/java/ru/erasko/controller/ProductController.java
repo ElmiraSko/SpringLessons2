@@ -12,8 +12,6 @@ import ru.erasko.exception.NotFoundException;
 import ru.erasko.model.Product;
 import ru.erasko.repo.ProductRepository;
 
-
-
 @Controller
 @RequestMapping
 public class ProductController {
@@ -26,21 +24,21 @@ public class ProductController {
         this.productRepository = productRepository;
     }
 
-    @GetMapping("/shop-single/{productId}")
+    @GetMapping("/product-single/{productId}")
     public String productList(@PathVariable("productId") Long id, Model model) {
         logger.info("Picture {}", id);
 
         Product product = productRepository.findById(id).orElseThrow(NotFoundException::new);
         model.addAttribute("product", product);
         model.addAttribute("products", productRepository.findAll());
-    return "shop-single";
+    return "product-single";
     }
 
-    @GetMapping("/shop")
+    @GetMapping("/products")
     public String products(Model model) {
         logger.info("Products");
 
         model.addAttribute("products", productRepository.findAll());
-        return "shop";
+        return "products";
     }
 }
