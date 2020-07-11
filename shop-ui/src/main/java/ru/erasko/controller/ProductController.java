@@ -24,14 +24,14 @@ public class ProductController {
         this.productRepository = productRepository;
     }
 
-    @GetMapping("/product-single/{productId}")
+    @GetMapping("/product_details/{productId}")
     public String productList(@PathVariable("productId") Long id, Model model) {
         logger.info("Picture {}", id);
 
         Product product = productRepository.findById(id).orElseThrow(NotFoundException::new);
         model.addAttribute("product", product);
         model.addAttribute("products", productRepository.findAll());
-    return "product-single";
+    return "product_details";
     }
 
     @GetMapping("/products")

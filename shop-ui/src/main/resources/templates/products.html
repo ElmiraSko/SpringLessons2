@@ -54,12 +54,12 @@
               <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up" th:object="${products}">
                 <div class="block-4 text-center border" th:each="prod : ${products}">
                   <figure class="block-4-image">
-                    <a th:href="@{'/product-single/' + ${prod.id}}">
+                    <a th:href="@{'/product_details/' + ${prod.id}}">
                       <img th:src="@{/picture/{pictureId}(pictureId=${prod.getPictures().get(0).id})}"
                             alt="Image placeholder" class="img-fluid"></a>
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a th:href="@{'/product-single/' + ${prod.id}}">
+                    <h3><a th:href="@{'/product_details/' + ${prod.id}}">
                       <span th:utext="${prod.title}">Tank Top</span></a></h3>
                     <p class="mb-0">Finding perfect <span th:utext="${prod.title}"></span></p>
                     <p class="text-primary font-weight-bold"><span th:utext="${prod.cost}"></span></p>
