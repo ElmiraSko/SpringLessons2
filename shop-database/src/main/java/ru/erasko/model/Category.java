@@ -13,7 +13,7 @@ public class Category {
     private Long id;
 
     @Column(length = 32, nullable = false)
-    private String title;
+    private String name;
 
     @OneToMany(mappedBy = "category")
     private List<Product> productList;
@@ -21,9 +21,9 @@ public class Category {
     public Category() {
     }
 
-    public Category(Long id, String title) {
+    public Category(Long id, String name) {
         this.id = id;
-        this.title = title;
+        this.name = name;
     }
 
     public Long getId() {
@@ -34,12 +34,12 @@ public class Category {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String title) {
+        this.name = title;
     }
 
     public List<Product> getProductList() {
@@ -55,19 +55,19 @@ public class Category {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Category category = (Category) o;
-        return title.equals(category.title);
+        return name.equals(category.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, productList);
+        return Objects.hash(id, name, productList);
     }
 
     @Override
     public String toString() {
         return "Category{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
+                ", title='" + name + '\'' +
                 '}';
     }
 }

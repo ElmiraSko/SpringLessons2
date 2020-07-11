@@ -20,8 +20,8 @@
                     <thead class="thead-light">
                     <tr>
                         <th>Id</th>
-                        <th>Title</th>
-                        <th>Cost</th>
+                        <th>Name</th>
+                        <th>Price</th>
                         <th>Category</th>
                         <th class="actions">Actions</th>
                     </tr>
@@ -30,9 +30,9 @@
                     <tbody>
                     <tr th:each="prod : ${products}">
                         <th scope="row" th:text="${prod.id}">1</th>
-                        <td th:text="${prod.title}">title</td>
-                        <td th:text="${prod.cost}">cost</td>
-                        <td th:text="${prod.category.title}">category</td>
+                        <td th:text="${prod.name}">name</td>
+                        <td th:text="${prod.price}">price</td>
+                        <td th:text="${prod.category.name}">category</td>
                         <td>
                             <a class="btn btn-primary"  th:href="@{/product/edit/{id} (id=${prod.id})}">
                                 <i class="fas fa-edit"></i></a>

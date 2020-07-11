@@ -11,7 +11,7 @@
         <div class="row">
           <div class="col-md-12 mb-0"><a th:href="@{/index}">Home</a>
             <span class="mx-2 mb-0">/</span>
-            <strong class="text-black"><span th:utext="${product.title}"></span></strong>
+            <strong class="text-black"><span th:utext="${product.name}"></span></strong>
           </div>
         </div>
       </div>
@@ -25,7 +25,7 @@
                  alt="Image" class="img-fluid">
           </div>
           <div class="col-md-6">
-            <h2 class="text-black"><span th:utext="*{product.title}"></span></h2>
+            <h2 class="text-black"><span th:utext="*{product.name}"></span></h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Pariatur, vitae, explicabo? Incidunt facere, natus soluta dolores iusto!
               Molestiae expedita veritatis nesciunt doloremque sint asperiores fuga voluptas,
@@ -34,7 +34,7 @@
               Quos repellat dignissimos minus, eveniet nam voluptatibus molestias omnis reiciendis
               perspiciatis illum hic magni iste, velit aperiam quis.</p>
             <p><strong class="text-primary h4">
-              <span th:utext="${product.cost}"></span>
+              <span th:utext="${product.price}"></span>
             </strong></p>
             <div class="mb-1 d-flex">
               <label for="option-sm" class="d-flex mr-3 mb-3">
@@ -96,11 +96,11 @@
                   </figure>
                   <div class="block-4-text p-4">
                     <h3><a th:href="@{shop-single/{productId}(pictureId=${prod.id})}">
-                      <span th:utext="${prod.title}"></span>
+                      <span th:utext="${prod.name}"></span>
                     </a></h3>
-                    <p class="mb-0">Finding perfect <span th:utext="${prod.title}"></span></p>
+                    <p class="mb-0">Finding perfect <span th:utext="${prod.name}"></span></p>
                     <p class="text-primary font-weight-bold">
-                      <span th:utext="${prod.cost}"></span></p>
+                      <span th:utext="${prod.price}"></span></p>
                   </div>
                 </div>
               </div>
