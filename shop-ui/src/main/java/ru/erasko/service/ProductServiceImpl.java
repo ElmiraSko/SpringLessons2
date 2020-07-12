@@ -1,4 +1,13 @@
 package ru.erasko.service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Service;
+import ru.erasko.controller.repr.ProductRepr;
+import ru.erasko.model.Product;
+import ru.erasko.repo.ProductRepository;
+
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

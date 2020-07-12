@@ -1,5 +1,8 @@
 package ru.erasko.service;
 
+import ru.erasko.controller.repr.ProductRepr;
+import ru.erasko.service.model.LineItem;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;

@@ -12,9 +12,9 @@ public class ProductRepr implements Serializable {
 
     private Long id;
 
-    private String title;
+    private String name;
 
-    private BigDecimal cost;
+    private BigDecimal price;
 
     private String categoryName;
 
@@ -27,9 +27,9 @@ public class ProductRepr implements Serializable {
 
     public ProductRepr(Product product) {
         this.id = product.getId();
-        this.title = product.getTitle();
-        this.cost = product.getCost();
-        this.categoryName = product.getCategory().getTitle();
+        this.name = product.getName();
+        this.price = product.getPrice();
+        this.categoryName = product.getCategory().getName();
         this.brandName = product.getBrand().getName();
         this.pictureIds = product.getPictures().stream()
                 .map(Picture::getId)
@@ -44,20 +44,20 @@ public class ProductRepr implements Serializable {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public BigDecimal getCost() {
-        return cost;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setCost(BigDecimal cost) {
-        this.cost = cost;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public String getCategoryName() {
@@ -83,4 +83,5 @@ public class ProductRepr implements Serializable {
     public void setPictureIds(List<Long> pictureIds) {
         this.pictureIds = pictureIds;
     }
+
 }

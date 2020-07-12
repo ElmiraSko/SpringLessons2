@@ -49,13 +49,13 @@
                 </div>
               </div>
             </div>
-            <div class="row mb-5">
 
-              <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up" th:object="${products}">
-                <div class="block-4 text-center border" th:each="prod : ${products}">
+            <div class="row mb-5" th:each="prodGroup : ${products}">
+              <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up" th:each="prod : ${prodGroup}">
+                <div class="block-4 text-center border">
                   <figure class="block-4-image">
                     <a th:href="@{'/product_details/' + ${prod.id}}">
-                      <img th:src="@{/picture/{pictureId}(pictureId=${prod.getPictures().get(0).id})}"
+                      <img th:src="@{/picture/{pictureId}(pictureId=${prod.pictureIds[0]})}"
                             alt="Image placeholder" class="img-fluid"></a>
                   </figure>
                   <div class="block-4-text p-4">
@@ -66,8 +66,8 @@
                   </div>
                 </div>
               </div>
-
             </div>
+
             <div class="row" data-aos="fade-up">
               <div class="col-md-12 text-center">
                 <div class="site-block-27">

@@ -25,7 +25,6 @@ public class LineItem implements Serializable {
         this.color = color;
         this.material = material;
     }
-
     public LineItem() {
     }
 
@@ -71,7 +70,7 @@ public class LineItem implements Serializable {
 
     @JsonIgnore
     public BigDecimal getTotal() {
-        return productRepr.getCost().multiply(new BigDecimal(qty));
+        return productRepr.getPrice().multiply(new BigDecimal(qty));
     }
 
     @Override
@@ -88,4 +87,13 @@ public class LineItem implements Serializable {
     public int hashCode() {
         return Objects.hash(productId, color, material);
     }
+
+    @Override
+    public String toString() {
+        return "LineItem{" +
+                "productId=" + productId +
+                ", qty=" + qty +
+                '}';
+    }
 }
+

@@ -21,7 +21,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <img th:src="@{/picture/{pictureId}(pictureId=${product.getPictures().get(0).id})}"
+            <img th:src="@{/picture/{pictureId}(pictureId=${product.getPictureIds()[0]})}"
                  alt="Image" class="img-fluid">
           </div>
           <div class="col-md-6">
@@ -58,20 +58,23 @@
                 <span class="d-inline-block text-black"> Extra Large</span>
               </label>
             </div>
+            <form th:action="@{/cart}" method="post">
             <div class="mb-5">
               <div class="input-group mb-3" style="max-width: 120px;">
-              <div class="input-group-prepend">
-                <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
-              </div>
-              <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-              <div class="input-group-append">
-                <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                <div class="input-group-prepend">
+                  <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                </div>
+                <input type="text" name="qty" class="form-control text-center" value="1"
+                       placeholder="" aria-label="Example text with button addon"
+                       aria-describedby="button-addon1">
+                <input type="hidden" name="productId" th:value="${product.id}">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                </div>
               </div>
             </div>
-
-            </div>
-            <p><a th:href="@{cart.html}" class="buy-now btn btn-sm btn-primary">Add To Cart</a></p>
-
+              <button class="buy-now btn btn-sm btn-primary" type="submit" title="add to cart"> Add to cart </button>
+            </form>
           </div>
         </div>
       </div>
