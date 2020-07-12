@@ -20,7 +20,7 @@ public class MainController {
         this.productRepository = productRepository;
     }
 
-    @GetMapping("/index")
+    @GetMapping({"/", "/index"})
     public String indexPage(Model model) {
         logger.info("indexPage method");
 
