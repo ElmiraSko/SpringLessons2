@@ -51,8 +51,8 @@
             </div>
 
             <div class="row mb-5" th:each="prodGroup : ${products}">
-              <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up" th:each="prod : ${prodGroup}">
-                <div class="block-4 text-center border">
+              <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
+                <div class="block-4 text-center border" th:each="prod : ${prodGroup}" >
                   <figure class="block-4-image">
                     <a th:href="@{'/product_details/' + ${prod.id}}">
                       <img th:src="@{/picture/{pictureId}(pictureId=${prod.pictureIds[0]})}"

@@ -79,8 +79,8 @@ public class ProductController {
         return "product_form";
     }
 
-    @DeleteMapping("/product")
-    public String delete(Model model, @PathVariable("id") Long id) {
+    @DeleteMapping("/product/{id}")
+    public String delete(Model model, @PathVariable(value="id") long id) {
         logger.info("Delete product width id {} ", id);
         model.addAttribute("activePage", "Products");
         productService.deleteById(id);
