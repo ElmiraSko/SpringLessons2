@@ -14,7 +14,15 @@
                  relativeToChangelogFile="true"
                  splitStatements="true"
                  stripComments="true"/>
-        <rollback/>
+        <rollback>
+            <sqlFile dbms="mysql"
+                     encoding="utf8"
+                     endDelimiter="\nGO"
+                     path="01-drop-pictures-table.sql"
+                     relativeToChangelogFile="true"
+                     splitStatements="true"
+                     stripComments="true"/>
+        </rollback>
     </changeSet>
 
     <changeSet id="7" author="elmira">
@@ -25,7 +33,15 @@
                  relativeToChangelogFile="true"
                  splitStatements="true"
                  stripComments="true"/>
-        <rollback/>
+        <rollback>
+            <sqlFile dbms="mysql"
+                     encoding="utf8"
+                     endDelimiter="\nGO"
+                     path="02-back-alter-users-table.sql"
+                     relativeToChangelogFile="true"
+                     splitStatements="true"
+                     stripComments="true"/>
+        </rollback>
     </changeSet>
 
 </databaseChangeLog>
