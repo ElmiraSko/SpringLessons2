@@ -36,7 +36,7 @@
                         <td>
                             <a class="btn btn-primary"  th:href="@{/product/edit/{id} (id=${prod.id})}">
                                 <i class="fas fa-edit"></i></a>
-                            <form th:action="@{/product(id=${prod.id})}" th:method="delete"
+                            <form th:action="@{/product/{id}(id=${prod.id})}" th:method="delete"
                                   class="d-inline">
                                 <button class="btn btn-danger">
                                     <i class="far fa-trash-alt"></i>

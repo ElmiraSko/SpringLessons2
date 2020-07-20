@@ -13,7 +13,15 @@
                  relativeToChangelogFile="true"
                  splitStatements="true"
                  stripComments="true"/>
-        <rollback/>
+        <rollback>
+        <sqlFile dbms="mysql"
+                 encoding="utf8"
+                 endDelimiter="\nGO"
+                 path="01-back-alter-product-and-categories.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+        </rollback>
     </changeSet>
 
 </databaseChangeLog>
