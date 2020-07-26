@@ -55,7 +55,7 @@
                 <div class="block-4 text-center border">
                   <figure class="block-4-image">
                     <a th:href="@{'/product_details/' + ${prod.id}}">
-                      <img th:src="@{/picture/{pictureId}(pictureId=${prod.pictureIds[0]})}"
+                      <img th:src="@{http://localhost:8080/picture/picture/{pictureId}(pictureId=${prod.pictureIds[0]})}"
                             alt="Image placeholder" class="img-fluid"></a>
                   </figure>
                   <div class="block-4-text p-4">

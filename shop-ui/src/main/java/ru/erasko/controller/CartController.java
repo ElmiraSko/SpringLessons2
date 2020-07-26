@@ -10,6 +10,10 @@ import ru.erasko.service.CartService;
 import ru.erasko.service.ProductService;
 import ru.erasko.service.model.LineItem;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 @RequestMapping("/cart")
 @Controller
 public class CartController {
@@ -55,12 +59,13 @@ public class CartController {
         return "redirect:/cart";
     }
 
-// @ModelAttribute("lineItem") LineItem lineItems возвращает null
-    @PostMapping(value="/minus")
-    public String updateCartQty(@ModelAttribute("lineItem") LineItem lineItems) {
-        logger.info("Метод для уменьшения количества товара " + lineItems.getQty());
+//Попытка вернуть покупаемые товары, (не работает)
+    @PostMapping(value="/checkout")
+    public String updateCartCheckout(@ModelAttribute("lineItems") ArrayList<LineItem> lineItems) {
+
+        logger.info("Количество покупаемых товаров = " + lineItems.size()); // 0
 // код метода
-        return "redirect:/cart";
+        return "redirect:/index";
     }
 
 }
