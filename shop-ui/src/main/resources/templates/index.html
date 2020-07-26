@@ -81,7 +81,7 @@
               <div class="item" th:each="prod : ${products}">
                 <div class="block-4 text-center">
                   <figure class="block-4-image">
-                    <img th:src="@{/picture/{pictureId}(pictureId=${prod.getPictures().get(0).id})}"
+                    <img th:src="@{http://localhost:8080/picture/picture/{pictureId}(pictureId=${prod.getPictures().get(0).id})}"
                          alt="Image placeholder" class="img-fluid">
                   </figure>
                   <div class="block-4-text p-4">
