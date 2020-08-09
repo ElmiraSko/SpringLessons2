@@ -28,7 +28,7 @@ public class BrandController {
     }
 
     @GetMapping("/brands")
-    public String adminCategoriesPage(Model model) {
+    public String adminBrandsPage(Model model) {
         model.addAttribute("activePage", "Brands");
         model.addAttribute("brands", brandRepository.findAll());
         return "brands";
