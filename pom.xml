@@ -26,6 +26,7 @@
         <module>shop-admin-ui</module>
         <module>shop-ui</module>
         <module>picture-service</module>
+        <module>shop-admin-ui-test</module>
     </modules>
 
     <dependencyManagement>
