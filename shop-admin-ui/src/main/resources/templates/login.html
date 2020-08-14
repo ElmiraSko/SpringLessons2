@@ -4,11 +4,11 @@
 <head th:replace="fragments/header :: head"></head>
 
 <body class="bg-light">
+
 <div class="container h-100">
     <div class="row h-100 justify-content-center align-items-center">
         <div class="col-md-4">
             <h1 class="text-center mb-4">BootAdmin</h1>
-
 
             <div class="card">
                 <div class="card-body">
@@ -17,26 +17,29 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="Username" name="username">
+                            <input type="text" id="inp-username" class="form-control"
+                                   placeholder="Username" name="username">
                         </div>
 
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-key"></i></span>
                             </div>
-                            <input type="password" class="form-control" placeholder="Password" name="password">
+                            <input type="password" id="inp-password" class="form-control"
+                                   placeholder="Password" name="password">
                         </div>
 
-                       <div class="form-check mb-3">
-                           <label class="form-check-label">
-                               <input type="checkbox" name="remember" class="form-check-input">
-                               Remember Me
-                           </label>
-                       </div>
+                        <div class="form-check mb-3">
+                            <label class="form-check-label">
+                                <input type="checkbox" name="remember" class="form-check-input">
+                                Remember Me
+                            </label>
+                        </div>
 
                         <div class="row">
                             <div class="col pr-2">
-                                <button type="submit" class="btn btn-block btn-primary">Login</button>
+                                <button type="submit" id="btn-login"
+                                        class="btn btn-block btn-primary">Login</button>
                             </div>
 
                             <div class="col pl-2">
@@ -51,7 +54,7 @@
         </div>
     </div>
 </div>
-<script th:replace="fragments/footer :: scripts"></script>
 
+<script th:replace="fragments/footer :: scripts"></script>
 </body>
 </html>
