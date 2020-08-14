@@ -13,6 +13,7 @@ import ru.erasko.repo.UserRepository;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional(readOnly = true)
 public class UserAuthService implements UserDetailsService {
 
     private final UserRepository userRepository;
@@ -23,7 +24,6 @@ public class UserAuthService implements UserDetailsService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByName(username)
                 .map(user -> new User(

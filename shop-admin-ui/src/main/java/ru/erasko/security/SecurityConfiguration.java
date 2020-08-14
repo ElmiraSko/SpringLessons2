@@ -59,7 +59,7 @@ public class SecurityConfiguration {
                 .loginProcessingUrl("/auth")
                 .and()
                 .logout()
-                .logoutSuccessUrl("/")
+                .logoutSuccessUrl("/login")
                 .permitAll();
         }
     }

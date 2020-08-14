@@ -26,7 +26,8 @@
         <module>shop-admin-ui</module>
         <module>shop-ui</module>
         <module>picture-service</module>
-        <module>shop-admin-ui-test</module>
+        <module>shop-ui-admin-test</module>
+        <module>shop-admin-ui-test-brand</module>
     </modules>
 
     <dependencyManagement>
