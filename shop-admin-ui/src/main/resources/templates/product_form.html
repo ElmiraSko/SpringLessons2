@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" xmlns:th ="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+
+<body class="bg-light">
+<th:block th:if="${error}">
+    <div th:replace="fragments/header :: alert"></div>
+</th:block>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="d-flex">
+    <div th:replace="fragments/sidebar :: sidebar"></div>
+
+    <div class="content p-4">
+        <h2 class="mb-4" th:if="${edit}">Edit product</h2>
+        <h2 class="mb-4" th:if="${create}">Create product</h2>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <form th:action="@{/product}" method="post" th:object="${product}" enctype="multipart/form-data">
+                    <input th:type="hidden" th:field="*{id}">
+                    <div class="form-group">
+                        <label for="name">Title</label>
+                        <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Enter name"/>
+                        <small id="titleError" class="form-text text-muted"
+                               th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+                            title error</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="brand">Brand</label>
+                        <select class="form-control" id="brand" th:field="*{brand}" required>
+                            <option th:each="brand : ${brands}"
+                                    th:text="${brand.name}"
+                                    th:value="${brand.id}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <input type="number" id="price" th:field="*{price}" class="form-control" step="0.01" min="0" placeholder="0,00"/>
+                        <small id="priceError" class="form-text text-muted"
+                               th:if="${#fields.hasErrors('price')}" th:errors="*{price}">
+                            cost error</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="categories">Categories</label>
+                        <select multiple class="form-control" id="categories" th:field="*{category}" required>
+                            <option th:each="category : ${categories}"
+                                    th:text="${category.name}"
+                                    th:value="${category.id}"
+                                    th:selected="${product.category?.equals(category)}"></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newPictures">Product image</label>
+                        <input th:field="*{newPictures}" type="file" class="form-control" id="newPictures"
+                               placeholder="Upload new product picture" multiple>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+
+                <div class="container-fluid mb-4">
+                    <div class="card-columns" style="column-count: 5">
+                        <div class="card" th:each="pict : ${product.pictures}">
+                            <div class="card-header">Picture</div>
+                            <img class="card-img-bottom" th:src="@{/picture/{pictureId}(pictureId=${pict.id})}"
+                                 width="40%"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:replace="fragments/footer :: scripts"></script>
+
+</body>
+</html>

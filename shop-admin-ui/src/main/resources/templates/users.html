@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" xmlns:th ="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+
+<body class="bg-light">
+<div th:replace="fragments/header :: header"></div>
+
+<div class="d-flex">
+    <div th:replace="fragments/sidebar :: sidebar"></div>
+
+    <div class="content p-4">
+        <h2 class="mb-4">Users</h2>
+
+        <form th:action="@{/user/create}">
+            <button type="submit" class="btn btn-secondary">Add User</button>
+        </form><br>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <table id="users_table" class="table table-hover" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Age</th>
+                        <th>Role</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th class="actions">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="us : ${users}">
+                        <th scope="row" th:text="${us.id}">1</th>
+                        <td th:text="${us.name}">UserName</td>
+                        <td th:text="${us.firstName}">FirsName</td>
+                        <td th:text="${us.lastName}">LastName</td>
+                        <td th:text="${us.age}">UserAge</td>
+                        <td>
+                            <ul class="list-unstyled collapse show" id="roles" th:each="role : ${us.getRoles()}">
+                                <li th:text="${role.name}"></li>
+                            </ul>
+                        </td>
+                        <td th:text="${us.phone}">UserPhone</td>
+                        <td th:text="${us.email}">UserEmail</td>
+                        <td>
+                            <a class="btn btn-primary" href="#" th:href="@{/user/edit(id=${us.id})}">
+                                <i class="fas fa-edit"></i></a>
+                            <form th:action="@{/users(id=${us.id})}" th:method="delete"
+                                  class="d-inline">
+                                <button class="btn btn-danger">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:replace="fragments/footer :: scripts"></script>
+<script th:src="@{/js/datatables.min.js}"></script>
+<script>
+    $(document).ready(function () {
+        $('#users_table').DataTable();
+    });
+</script>
+
+</body>
+</html>
